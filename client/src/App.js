@@ -12,6 +12,7 @@ import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 import './App.css';
 
@@ -37,6 +38,8 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+
+
   render() {
     return (
       <Provider store={store}>
@@ -48,6 +51,17 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
             </div>
+            <Map google={this.props.google} zoom={14}>
+
+        <Marker onClick={this.onMarkerClick}
+                name={'Current location'} />
+
+        <InfoWindow onClose={this.onInfoWindowClose}>
+            <div>
+           
+            </div>
+        </InfoWindow>
+      </Map>
             <Footer />
           </div>
         </Router>
@@ -56,4 +70,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default GoogleApiWrapper({
+  apiKey: ("AIzaSyCRCXFCfrfaBTgSVlxWTbF8FYiVJq1xUho")
+})(App)
