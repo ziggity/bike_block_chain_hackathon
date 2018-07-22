@@ -1,4 +1,6 @@
-module.exports = {
-    mongoURI: 'mongodb://zach:zach11@ds145911.mlab.com:45911/bike_blockchain_hackathon',
-    secretOrKey: 'secret'
-}
+if (process.env.NODE_ENV === 'production') {
+    module.exports = require('./keys_prod');
+  } else {
+    module.exports = require('./keys_dev');
+  }
+  
